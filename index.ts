@@ -171,11 +171,11 @@ function sortBySex() {
 }
 
 
-// const sortIcons = {
-//     none: '▲',
-//     asc: '▲',
-//     desc: '▼'
-// };
+const sortIcons = {
+    none: '>',
+    asc: '<',
+    desc: '>'
+};
 
 function toggleSortIcon(target: HTMLElement, sortBy: string) {
     const currentSortIcon = target.textContent.trim();

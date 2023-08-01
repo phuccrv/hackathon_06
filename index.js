@@ -127,11 +127,11 @@ function sortBySex() {
     students.sort(function (a, b) { return a.sex.localeCompare(b.sex); });
     displayStudentList();
 }
-// const sortIcons = {
-//     none: '▲',
-//     asc: '▲',
-//     desc: '▼'
-// };
+var sortIcons = {
+    none: '>',
+    asc: '<',
+    desc: '>'
+};
 function toggleSortIcon(target, sortBy) {
     var currentSortIcon = target.textContent.trim();
     var nextSort = currentSortIcon === sortIcons.asc ? sortIcons.desc : sortIcons.asc;
