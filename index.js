@@ -97,3 +97,88 @@ function closeEditModal() {
     editForm.reset();
     editModal.style.display = 'none';
 }
+// sắp xếp
+var table = document.getElementById('studentTable');
+var thead = table.querySelector('thead');
+thead.addEventListener('click', function (event) {
+    var target = event.target;
+    if (target.tagName === 'TH' && target.dataset.sort) {
+        var sortBy = target.dataset.sort;
+        if (sortBy === 'name') {
+            sortByName();
+        }
+        else if (sortBy === 'age') {
+            sortByAge();
+        }
+        else if (sortBy === 'sex') {
+            sortBySex();
+        }
+    }
+});
+function sortByName() {
+    students.sort(function (a, b) { return a.name.localeCompare(b.name); });
+    displayStudentList();
+}
+function sortByAge() {
+    students.sort(function (a, b) { return a.age - b.age; });
+    displayStudentList();
+}
+function sortBySex() {
+    students.sort(function (a, b) { return a.sex.localeCompare(b.sex); });
+    displayStudentList();
+}
+// const sortIcons = {
+//     none: '▲',
+//     asc: '▲',
+//     desc: '▼'
+// };
+function toggleSortIcon(target, sortBy) {
+    var currentSortIcon = target.textContent.trim();
+    var nextSort = currentSortIcon === sortIcons.asc ? sortIcons.desc : sortIcons.asc;
+    target.textContent = "".concat(sortBy, " ").concat(nextSort);
+}
+function sortByName() {
+    students.sort(function (a, b) { return a.name.localeCompare(b.name); });
+    displayStudentList();
+}
+function sortByAge() {
+    students.sort(function (a, b) { return a.age - b.age; });
+    displayStudentList();
+}
+function sortBySex() {
+    students.sort(function (a, b) { return a.sex.localeCompare(b.sex); });
+    displayStudentList();
+}
+function sortTable(event) {
+    var target = event.target;
+    if (target.tagName === 'TH' && target.dataset.sort) {
+        var sortBy = target.dataset.sort;
+        var currentSortIcon = target.textContent.trim();
+        toggleSortIcon(target, sortBy);
+        if (currentSortIcon === sortIcons.none || currentSortIcon === sortIcons.desc) {
+            if (sortBy === 'name') {
+                sortByName();
+            }
+            else if (sortBy === 'age') {
+                sortByAge();
+            }
+            else if (sortBy === 'sex') {
+                sortBySex();
+            }
+        }
+        else if (currentSortIcon === sortIcons.asc) {
+            if (sortBy === 'name') {
+                students.reverse();
+            }
+            else if (sortBy === 'age') {
+                students.sort(function (a, b) { return b.age - a.age; });
+            }
+            else if (sortBy === 'sex') {
+                students.sort(function (a, b) { return b.sex.localeCompare(a.sex); });
+            }
+            displayStudentList();
+        }
+    }
+}
+var thead = table.querySelector('thead');
+thead.addEventListener('click', sortTable);

@@ -134,3 +134,97 @@ function closeEditModal() {
     editForm.reset();
     editModal.style.display = 'none';
 }
+
+
+// sắp xếp
+
+const table = document.getElementById('studentTable');
+const thead = table.querySelector('thead');
+
+thead.addEventListener('click', (event: Event) => {
+    const target = event.target as HTMLElement;
+    if (target.tagName === 'TH' && target.dataset.sort) {
+        const sortBy = target.dataset.sort;
+        if (sortBy === 'name') {
+            sortByName();
+        } else if (sortBy === 'age') {
+            sortByAge();
+        } else if (sortBy === 'sex') {
+            sortBySex();
+        }
+    }
+});
+
+function sortByName() {
+    students.sort((a, b) => a.name.localeCompare(b.name));
+    displayStudentList();
+}
+
+function sortByAge() {
+    students.sort((a, b) => a.age - b.age);
+    displayStudentList();
+}
+
+function sortBySex() {
+    students.sort((a, b) => a.sex.localeCompare(b.sex));
+    displayStudentList();
+}
+
+
+// const sortIcons = {
+//     none: '▲',
+//     asc: '▲',
+//     desc: '▼'
+// };
+
+function toggleSortIcon(target: HTMLElement, sortBy: string) {
+    const currentSortIcon = target.textContent.trim();
+    const nextSort = currentSortIcon === sortIcons.asc ? sortIcons.desc : sortIcons.asc;
+    target.textContent = `${sortBy} ${nextSort}`;
+}
+
+function sortByName() {
+    students.sort((a, b) => a.name.localeCompare(b.name));
+    displayStudentList();
+}
+
+function sortByAge() {
+    students.sort((a, b) => a.age - b.age);
+    displayStudentList();
+}
+
+function sortBySex() {
+    students.sort((a, b) => a.sex.localeCompare(b.sex));
+    displayStudentList();
+}
+
+function sortTable(event: Event) {
+    const target = event.target as HTMLElement;
+    if (target.tagName === 'TH' && target.dataset.sort) {
+        const sortBy = target.dataset.sort;
+        const currentSortIcon = target.textContent.trim();
+        toggleSortIcon(target, sortBy);
+
+        if (currentSortIcon === sortIcons.none || currentSortIcon === sortIcons.desc) {
+            if (sortBy === 'name') {
+                sortByName();
+            } else if (sortBy === 'age') {
+                sortByAge();
+            } else if (sortBy === 'sex') {
+                sortBySex();
+            }
+        } else if (currentSortIcon === sortIcons.asc) {
+            if (sortBy === 'name') {
+                students.reverse();
+            } else if (sortBy === 'age') {
+                students.sort((a, b) => b.age - a.age);
+            } else if (sortBy === 'sex') {
+                students.sort((a, b) => b.sex.localeCompare(a.sex));
+            }
+            displayStudentList();
+        }
+    }
+}
+
+const thead = table.querySelector('thead');
+thead.addEventListener('click', sortTable);
