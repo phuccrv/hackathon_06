@@ -51,7 +51,7 @@ export default {
           const result = studentMd.delete(studentId);
     
           if (result) {
-            return res.status(200).redirect('/views');
+            return res.status(200).json(result);
           } else {
             return res.status(500).json({
               message: "Failed! Student not found or error while deleting.",
