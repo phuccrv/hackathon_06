@@ -1,0 +1,48 @@
+/* style.css */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+form{
+    border: 1px solid ;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 100px;
+}
+
+form input{
+    margin: 10px 100px;
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    outline: none;
+}
+
+form button{
+    margin-left: 10px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(62, 131, 205);
+    color: white;
+    width: 100px;
+    cursor: pointer;
+}
+
+form button:hover{
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+}

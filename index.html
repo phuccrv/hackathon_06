@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- phần bài 1 -->
+    <div id="root"></div>
+    <!-- phần bài 2 -->
+        <h1>Student List</h1>
+        <table id="studentTable">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Sex</th>
+            </tr>
+        </table>
+        <!-- phần bài 3 -->
+        <h1>Add New Student</h1>
+        <form id="studentForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required><br>
+            <label for="age">Age:</label>
+            <input type="number" id="age" required><br>
+            <label for="sex">Sex:</label>
+            <select id="sex" required>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+            </select><br>
+            <button type="submit">Add Student</button>
+        </form>
+<script src="./index.js"></script>
+</html>
