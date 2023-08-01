@@ -47,16 +47,22 @@ export default {
     },
     delete: (req: Request, res: Response) => {
         try {
-            let result:GetMany = studentMd.delete(Number(req.params.studentId));
-            return res.status(200).redirect('/views')
-        }catch {
-            return res.status(500).json(
-                {
-                    message: "Failed!"
-                }
-            )
+          const studentId = Number(req.params.studentId);
+          const result = studentMd.delete(studentId);
+    
+          if (result) {
+            return res.status(200).redirect('/views');
+          } else {
+            return res.status(500).json({
+              message: "Failed! Student not found or error while deleting.",
+            });
+          }
+        } catch (error) {
+          return res.status(500).json({
+            message: "Failed! An error occurred while deleting student.",
+          });
         }
-    },
+      },
     update: (req: Request, res: Response) => {
         try {
             let result:GetMany = studentMd.update(Number(req.params.studentId), req.body);
