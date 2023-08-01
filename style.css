@@ -21,6 +21,7 @@ form{
     display: flex;
     align-items: center;
     padding-left: 100px;
+    padding-right: 50px;
 }
 
 form input{
@@ -45,4 +46,35 @@ form button{
 form button:hover{
     font-weight: bold;
     transition: 0.4s ease-in-out;
+}
+
+
+/* style.css */
+/* ... */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 20% auto;
+    padding: 20px;
+    width: 80%;
+    border-radius: 5px;
+}
+
+.modal-content h2 {
+    margin-bottom: 10px;
+}
+
+#closeModal {
+    margin-left: 10px;
 }

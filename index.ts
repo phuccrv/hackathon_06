@@ -28,12 +28,13 @@ function displayStudentList() {
     const tbody:any = table.querySelector('tbody');
     tbody.innerHTML = '';
 
-    students.forEach((student) => {
+    students.forEach((student,index) => {
         tbody.innerHTML += `
             <tr>
                 <td>${student.name}</td>
                 <td>${student.age}</td>
                 <td>${student.sex}</td>
+                <td><button onclick="editStudent(${index})">Edit</button></td>
             </tr>
         `;
     });
@@ -81,3 +82,55 @@ const form = document.getElementById('studentForm');
 form.addEventListener('submit', addNewStudent);
 
 displayStudentList();
+
+// edit
+let editingIndex: number = -1;
+
+function editStudent(index: number) {
+    const editModal = document.getElementById('editModal');
+    const editForm = document.getElementById('editStudentForm') as HTMLFormElement;
+
+    const student = students[index];
+    editingIndex = index;
+
+    const editNameInput = document.getElementById('editName') as HTMLInputElement;
+    const editAgeInput = document.getElementById('editAge') as HTMLInputElement;
+    const editSexInput = document.getElementById('editSex') as HTMLSelectElement;
+
+    editNameInput.value = student.name;
+    editAgeInput.value = String(student.age);
+    editSexInput.value = student.sex;
+
+    editModal.style.display = 'block';
+
+    editForm.onsubmit = function(event: Event) {
+        event.preventDefault();
+
+        const editedName = editNameInput.value.trim();
+        const editedAge = Number(editAgeInput.value);
+        const editedSex = editSexInput.value as Sex;
+
+        if (editedName && editedAge && editedSex) {
+            const editedStudent: Student = {
+                name: editedName,
+                age: editedAge,
+                sex: editedSex,
+            };
+            students[editingIndex] = editedStudent;
+            displayStudentList();
+            closeEditModal();
+        }
+    };
+
+    const closeModalButton = document.getElementById('closeModal');
+    closeModalButton.onclick = closeEditModal;
+}
+
+function closeEditModal() {
+    const editModal = document.getElementById('editModal');
+    const editForm = document.getElementById('editStudentForm') as HTMLFormElement;
+    editingIndex = -1;
+
+    editForm.reset();
+    editModal.style.display = 'none';
+}

@@ -1,7 +1,7 @@
 // bài 1
 var root = document.querySelector('#root');
 root.innerHTML = "<h1>xin chào REKEI</h1>";
-// index.ts
+// bài 2
 var Sex;
 (function (Sex) {
     Sex["MALE"] = "MALE";
@@ -18,10 +18,11 @@ function displayStudentList() {
     var table = document.getElementById('studentTable');
     var tbody = table.querySelector('tbody');
     tbody.innerHTML = '';
-    students.forEach(function (student) {
-        tbody.innerHTML += "\n            <tr>\n                <td>".concat(student.name, "</td>\n                <td>").concat(student.age, "</td>\n                <td>").concat(student.sex, "</td>\n            </tr>\n        ");
+    students.forEach(function (student, index) {
+        tbody.innerHTML += "\n            <tr>\n                <td>".concat(student.name, "</td>\n                <td>").concat(student.age, "</td>\n                <td>").concat(student.sex, "</td>\n                <td><button onclick=\"editStudent(").concat(index, ")\">Edit</button></td>\n            </tr>\n        ");
     });
 }
+// bài 3
 function addNewStudent(event) {
     event.preventDefault();
     var nameInput = document.getElementById('name');
@@ -56,3 +57,43 @@ function sortBySex() {
 var form = document.getElementById('studentForm');
 form.addEventListener('submit', addNewStudent);
 displayStudentList();
+// edit
+var editingIndex = -1;
+function editStudent(index) {
+    var editModal = document.getElementById('editModal');
+    var editForm = document.getElementById('editStudentForm');
+    var student = students[index];
+    editingIndex = index;
+    var editNameInput = document.getElementById('editName');
+    var editAgeInput = document.getElementById('editAge');
+    var editSexInput = document.getElementById('editSex');
+    editNameInput.value = student.name;
+    editAgeInput.value = String(student.age);
+    editSexInput.value = student.sex;
+    editModal.style.display = 'block';
+    editForm.onsubmit = function (event) {
+        event.preventDefault();
+        var editedName = editNameInput.value.trim();
+        var editedAge = Number(editAgeInput.value);
+        var editedSex = editSexInput.value;
+        if (editedName && editedAge && editedSex) {
+            var editedStudent = {
+                name: editedName,
+                age: editedAge,
+                sex: editedSex,
+            };
+            students[editingIndex] = editedStudent;
+            displayStudentList();
+            closeEditModal();
+        }
+    };
+    var closeModalButton = document.getElementById('closeModal');
+    closeModalButton.onclick = closeEditModal;
+}
+function closeEditModal() {
+    var editModal = document.getElementById('editModal');
+    var editForm = document.getElementById('editStudentForm');
+    editingIndex = -1;
+    editForm.reset();
+    editModal.style.display = 'none';
+}
